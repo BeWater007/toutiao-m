@@ -1,20 +1,17 @@
 <template>
   <div>
-    <router-view></router-view>
+    我是问答页面
   </div>
 </template>
 
 <script>
 export default {
   data () {
-    return {
-    }
+    return {}
   },
 
   methods: {}
-
 }
-
 </script>
 <style  scoped>
 </style>
