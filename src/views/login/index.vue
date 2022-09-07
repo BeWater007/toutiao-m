@@ -1,7 +1,10 @@
 <template>
   <div>
     <!-- 头部标题 -->
-    <van-nav-bar class="abc" title="登录" />
+    <van-nav-bar class="abc"
+    left-arrow
+    title="登录"
+    @click-left="$router.back()"/>
     <!-- 输入框 -->
     <van-form @submit="onSubmit" ref="yzmBtn">
       <!-- 手机号输入框 -->
@@ -99,12 +102,16 @@ export default {
       })
       try {
         const res = await loginAPI(this.user)
-        console.log(res)
+        // console.log(res)
         this.$store.commit('setUsers', res.data)
         this.$toast.success('登录成功')
+        // 跳转页面
+        this.$router.push({
+          name: 'my'
+        })
       } catch (err) {
+        // console.log(err)
         if (err.response.status === 400) {
-          // console.log('手机号或验证码错误', err)
           this.$toast.fail('手机号或验证码错误')
         } else {
           // console.log('登录失败，请稍候重试', err)
@@ -150,4 +157,5 @@ export default {
 .yzmBtn {
   height: 25px;
 }
+
 </style>
