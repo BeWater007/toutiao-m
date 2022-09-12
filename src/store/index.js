@@ -5,7 +5,7 @@ import { getItem, setItem } from '../utils/storage'
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
-    user: getItem('users') || null
+    user: getItem('users') || {}
   },
   mutations: {
     setUsers (state, data) {
@@ -15,8 +15,6 @@ export default new Vuex.Store({
       setItem('users', state.user)
     }
   },
-  actions: {
-  },
-  modules: {
-  }
+  actions: {},
+  modules: {}
 })

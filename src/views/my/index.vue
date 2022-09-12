@@ -1,7 +1,7 @@
 <template>
   <div class="my-container">
     <!-- 已登录的盒子 -->
-    <div class="header userinfo" v-if="user">
+    <div class="header userinfo" v-if="user.token">
       <!-- 左侧用户头像部分 -->
       <div class="info">
         <div class="avatar">
@@ -13,7 +13,7 @@
             fit="cover"
             :src="info.photo"
           />
-          <span>{{info.name}}</span>
+          <span>{{ info.name }}</span>
         </div>
         <div class="edit">
           <van-button type="primary" round class="btn">编辑资料</van-button>
@@ -21,19 +21,19 @@
       </div>
       <div class="data">
         <div class="item">
-          <div class="count">{{info.art_count}}</div>
+          <div class="count">{{ info.art_count }}</div>
           <div class="text">头条</div>
         </div>
         <div class="item">
-          <div class="count">{{info.fans_count}}</div>
+          <div class="count">{{ info.fans_count }}</div>
           <div class="text">关注</div>
         </div>
         <div class="item">
-          <div class="count">{{info.follow_count}}</div>
+          <div class="count">{{ info.follow_count }}</div>
           <div class="text">粉丝</div>
         </div>
         <div class="item">
-          <div class="count">{{info.like_count}}</div>
+          <div class="count">{{ info.like_count }}</div>
           <div class="text">获赞</div>
         </div>
       </div>
@@ -77,7 +77,7 @@
       <van-cell center title="消息通知" is-link class="cell"> </van-cell>
       <van-cell center title="小智同学" is-link class="cell"> </van-cell>
     </div>
-    <div class="tuichu" v-if="user">
+    <div class="tuichu" v-if="user.token">
       <van-cell center title="退出登录" class="cell" @click="tuichuFn">
       </van-cell>
     </div>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { getMyIofoAPI } from '../api'
+import { getMyIofoAPI } from '../../api'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
@@ -108,12 +108,13 @@ export default {
     // 点击退出按钮
     tuichuFn () {
       // console.log('123')
-      this.$dialog.confirm({
-        message: '您确定要退出吗'
-      })
+      this.$dialog
+        .confirm({
+          message: '您确定要退出吗'
+        })
         .then(() => {
           // on confirm
-          this.setUsers(null)
+          this.setUsers({})
         })
         .catch(() => {
           // on cancel
@@ -123,7 +124,7 @@ export default {
     async getUserInfo () {
       const res = await getMyIofoAPI()
       this.info = res.data
-    // console.log(this.info)
+      // console.log(this.info)
     }
   }
 }
