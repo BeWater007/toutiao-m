@@ -3,7 +3,7 @@
     <!-- 头部navbar -->
     <van-nav-bar class="nav-bar">
       <template #title>
-        <van-button color="#5aacf9" class="nav-btn" round icon="search"
+        <van-button color="#5aacf9" class="nav-btn" round icon="search" to="/search"
           >搜索</van-button
         >
       </template>

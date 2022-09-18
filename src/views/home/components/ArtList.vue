@@ -106,7 +106,7 @@ export default {
         const { results } = data // （这个是请求回来的结果数据）
         // 数组的展开操作符...，它会把数组元素一个一个拿出来
         this.list.push(...results) // （将结果数据拆包之后，加到list中）
-
+        // console.log(this.list)
         // 3. 本次数据加载结束之后要把加载状态设置为结束
         this.loading = false // （隐藏加载中）
         // 更新获取下一页数据的时间戳

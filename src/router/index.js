@@ -1,51 +1,67 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Login from '@/views/login'
-import Layout from '@/views/layout'
-import Home from '@/views/home'
-import My from '@/views/my'
-import Wenda from '@/views/wenda'
-import Video from '@/views/video'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Login from "@/views/login";
+import Layout from "@/views/layout";
+import Home from "@/views/home";
+import My from "@/views/my";
+import Wenda from "@/views/wenda";
+import Video from "@/views/video";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 // 路由规则
 const routes = [
+  { path: "/login", name: "login", component: Login },
   {
-    path: '/',
-    redirect: '/layout'
-  },
-  { path: '/login', name: 'login', component: Login },
-  {
-    path: '/layout',
+    path: "/",
     component: Layout,
-    redirect: '/layout/home',
+    redirect: "/home",
     children: [
       {
-        path: 'home',
+        path: "home",
         component: Home,
-        name: 'home'
+        name: "home",
       },
       {
-        path: 'wenda',
+        path: "wenda",
         component: Wenda,
-        name: 'wenda'
+        name: "wenda",
       },
       {
-        path: 'video',
+        path: "video",
         component: Video,
-        name: 'video'
+        name: "video",
       },
       {
-        path: 'my',
+        path: "my",
         component: My,
-        name: 'my'
-      }
-    ]
-  }
-]
+        name: "my",
+      },
+    ],
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: () => import("../views/search"),
+  },
+  {
+    path: "/article/:articleId",
+    component: () => import("../views/article"),
+    name: "article",
+    props: true, //开启props传参，把路由的参数映射到组件的props对象当中
+  },
+  {
+    path: "/user-profile",
+    name: "user-profile",
+    component: () => import("../views/user-profile"),
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
-
-export default router
+  routes,
+});
+//解决反复跳转页面报错
+const VueRouterPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(to) {
+  return VueRouterPush.call(this, to).catch((err) => err);
+};
+export default router;

@@ -16,7 +16,9 @@
           <span>{{ info.name }}</span>
         </div>
         <div class="edit">
-          <van-button type="primary" round class="btn">编辑资料</van-button>
+          <van-button type="primary" round class="btn" to="/user-profile"
+            >编辑资料</van-button
+          >
         </div>
       </div>
       <div class="data">
@@ -85,49 +87,53 @@
 </template>
 
 <script>
-import { getMyIofoAPI } from '../../api'
-import { mapState, mapMutations } from 'vuex'
+import { getMyIofoAPI } from "../../api";
+import { mapState, mapMutations } from "vuex";
 
 export default {
-  data () {
+  data() {
     return {
-      src: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F13915836551%2F1000.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1665107527&t=b6842da8e4b74480747b8beb75a45a7c',
-      info: ''
-    }
+      src: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F13915836551%2F1000.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1665107527&t=b6842da8e4b74480747b8beb75a45a7c",
+      info: "",
+    };
   },
-  created () {
-    if (this.user) {
-      this.getUserInfo()
+  created() {
+    if (this.user.token) {
+      this.getUserInfo();
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(["user"]),
   },
   methods: {
-    ...mapMutations(['setUsers']),
+    ...mapMutations(["setUsers"]),
     // 点击退出按钮
-    tuichuFn () {
+    tuichuFn() {
       // console.log('123')
       this.$dialog
         .confirm({
-          message: '您确定要退出吗'
+          message: "您确定要退出吗",
         })
         .then(() => {
           // on confirm
-          this.setUsers({})
+          this.setUsers({});
         })
         .catch(() => {
           // on cancel
-        })
+        });
     },
     // 用户登录后获取数据
-    async getUserInfo () {
-      const res = await getMyIofoAPI()
-      this.info = res.data
-      // console.log(this.info)
-    }
-  }
-}
+    async getUserInfo() {
+      try {
+        const res = await getMyIofoAPI();
+        this.info = res.data;
+        // console.log(this.info)
+      } catch {
+        this.$toast("登录过期请重新登录");
+      }
+    },
+  },
+};
 </script>
 <style  lang="less">
 body {

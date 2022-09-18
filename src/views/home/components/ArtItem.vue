@@ -1,5 +1,13 @@
 <template>
-  <van-cell class="article-item">
+  <van-cell
+    class="article-item"
+    :to="{
+      name: 'article',
+      params: {
+        articleId: article.art_id,
+      },
+    }"
+  >
     <!-- 标题 -->
     <template #title>
       <div class="title van-multi-ellipsis--l2">{{ article.title }}</div>
@@ -19,7 +27,7 @@
       <div class="label-info-wrap">
         <span>{{ article.aut_name }}</span>
         <span>{{ article.comm_count }}评论</span>
-        <span>{{ article.pubdate |timer }}</span>
+        <span>{{ article.pubdate | timer }}</span>
       </div>
     </template>
     <!-- 一张图片的时候 -->
@@ -36,23 +44,23 @@
 
 <script>
 export default {
-  name: 'ArticleItem',
+  name: "ArticleItem",
   components: {},
   props: {
     article: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
-    return {}
+  data() {
+    return {};
   },
   computed: {},
   watch: {},
-  created () {},
-  mounted () {},
-  methods: {}
-}
+  created() {},
+  mounted() {},
+  methods: {},
+};
 </script>
 
 <style scoped lang="less">

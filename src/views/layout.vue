@@ -4,29 +4,29 @@
     <router-view></router-view>
     <!-- 底部导航栏 -->
     <!-- 搭配路由使用 -->
-    <van-tabbar  route>
-      <van-tabbar-item icon="home-o" replace to="/layout/home">
+    <van-tabbar route>
+      <van-tabbar-item icon="home-o" replace to="/home">
         <template #icon>
           <i class="cs cs-shouye"></i>
         </template>
         <span class="text">首页</span>
       </van-tabbar-item>
 
-      <van-tabbar-item icon="search" replace to="/layout/wenda">
+      <van-tabbar-item icon="search" replace to="/wenda">
         <template #icon>
           <i class="cs cs-wenda"></i>
         </template>
         <span class="text">问答</span>
       </van-tabbar-item>
 
-      <van-tabbar-item icon="friends-o" replace to="/layout/video">
+      <van-tabbar-item icon="friends-o" replace to="/video">
         <template #icon>
           <i class="cs cs-shipin"></i>
         </template>
         <span class="text">视频</span>
       </van-tabbar-item>
 
-      <van-tabbar-item icon="setting-o" replace to="/layout/my">
+      <van-tabbar-item icon="setting-o" replace to="/my">
         <template #icon>
           <i class="cs cs-wode"></i>
         </template>
@@ -38,12 +38,11 @@
 
 <script>
 export default {
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
-  methods: {}
-}
+  methods: {},
+};
 </script>
 <style  scoped lang="less">
 .layout-container {
